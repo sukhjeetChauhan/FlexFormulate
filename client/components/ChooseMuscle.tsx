@@ -23,7 +23,7 @@ function ChooseMuscle() {
           onChange={handleChange}
           key={`${day}-${num}`}
           className={`${day}-${num} options`}
-          name={day}
+          name={`${day}${num}`}
         >
           <option value="">Select your muscle</option>
           <option value="back">Back</option>
@@ -55,7 +55,14 @@ function ChooseMuscle() {
 
   function handleData(e) {
     e.preventDefault()
-    console.log(e.target.tuesday.value)
+    const workoutWeek = workoutDays.map((day, index) => {
+      const res = []
+      for (let i = 0; i < count[index]; i++) {
+        res.push(e.target[`${day}${i}`].value)
+      }
+      return res
+    })
+    console.log(workoutWeek)
   }
 
   const result =
