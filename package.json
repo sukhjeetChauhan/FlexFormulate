@@ -3,7 +3,6 @@
   "type": "module",
   "version": "0.2.0",
   "description": "Using React Router to navigate the globe",
-  
   "main": "server/index.js",
   "scripts": {
     "build": "vite build",
@@ -24,6 +23,7 @@
     "@devacademy/eslint-config": "^1.9.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/superagent": "^8.1.4",
     "@vitejs/plugin-react": "^4.2.1",
     "esbuild": "^0.18.18",
     "eslint": "^8.10.0",
@@ -48,5 +48,8 @@
     "semi": false,
     "singleQuote": true
   },
-  "browserslist": "> 2%, not dead"
+  "browserslist": "> 2%, not dead",
+  "dependencies": {
+    "superagent": "^8.1.2"
+  }
 }
