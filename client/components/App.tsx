@@ -1,6 +1,7 @@
 import ChooseDays from './ChooseDays'
 import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
+import Exercise from './Exercise'
 function App() {
   return (
     <>

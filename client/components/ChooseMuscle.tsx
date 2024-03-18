@@ -1,4 +1,4 @@
-import { workoutDays } from '../../data/general'
+import { workoutDays, workoutWeek } from '../../data/general'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -40,14 +40,13 @@ function ChooseMuscle() {
 
   function handleData(e) {
     e.preventDefault()
-    const workoutWeek = workoutDays.map((day, index) => {
+    workoutDays.forEach((day, index) => {
       const res = []
       for (let i = 0; i < count[index]; i++) {
         res.push(e.target[`${day}${i}`].value)
       }
-      return res
+      workoutWeek.push(res)
     })
-    console.log(workoutWeek)
     navigate('/Exercise')
   }
 

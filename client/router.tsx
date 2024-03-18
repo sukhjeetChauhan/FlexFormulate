@@ -10,11 +10,13 @@ import Exercise from './components/Exercise.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route path="/chooseDays" element={<ChooseDays />} />
-      <Route path="/chooseMuscle" element={<ChooseMuscle />} />
-      <Route path="/Exercise" element={<Exercise />} />
-    </Route>
+    <>
+      <Route path="/" element={<App />}>
+        <Route path="/chooseDays" element={<ChooseDays />} />
+        <Route path="/chooseMuscle" element={<ChooseMuscle />} />
+        <Route path="/Exercise" element={<Exercise />} />
+      </Route>
+    </>
   )
 )
 
