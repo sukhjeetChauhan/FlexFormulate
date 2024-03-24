@@ -12,18 +12,20 @@ export default function Exercise() {
 
   // Need to define a function that calls everytime a body part changes
   // const { data, isLoading, isError } = useQuery({
-  //   queryKey: ['exercise', part],
-  //   queryFn: () => getExercise(part),
-  //   enabled: !!part,
+  //   queryKey: ['exercise', currentPartIndex],
+  //   queryFn: () => {
+  //     const part = workoutWeek[day][currentPartIndex]
+  //     return getExercise(part)
+  //   },
+  //   // enabled: !!currentPartIndex,
   // })
 
   // Need buttons  to change state of workout day and another state to change state of workout in each day.
   // /while changing the workout button check if state is the last element of randNum, if it is check if we current body part is last element of current workoutDay [i], if it is make count of randNum state back to zero and make part = first part of current day, if it is not then go to the next part and make count of randNum to 0.
   // Need another button to change state of Workout day.
 
-  // make a array (randNums) with lenght = 6/workoutDay[i].length i here will possibly be a state. This array will have random nums between 1 to 20 as data.
-
   ///UTILITY FUNCTIONS
+  // make a array (randNums) with lenght = 6/workoutDay[i].length i here will possibly be a state. This array will have random nums between 1 to 20 as data.
   function generateRandNumArray(min: number, max: number) {
     ////This function generates an array of random numbers
     // min and max included
@@ -96,11 +98,12 @@ export default function Exercise() {
   }
   console.log(count)
   console.log(currentPartIndex)
+  console.log(data)
 
   return (
     <>
       <h1>Exercise</h1>
-      <img src={fakeData.gifUrl} alt="ExerciseGif" />
+      <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" />
       <button className="button prev" onClick={handleChange}>
         prev
       </button>
