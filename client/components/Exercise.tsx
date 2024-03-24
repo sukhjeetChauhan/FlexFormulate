@@ -6,7 +6,9 @@ import { workoutWeek, workoutDays } from '../../data/general'
 
 export default function Exercise() {
   const [day, setDay] = useState(0) //workoutDays[0]
-  // const [part, setPart] = useState(workoutWeek[0][0])
+  const [count, setCount] = useState(0) // This state tracks workout
+  const [randomArr, setRandomArr] = useState(generateRandNumArray(1, 20))
+  const [currentPartIndex, setcurrentPartIndex] = useState(0) //workoutWeek[day][0]
 
   // Need to define a function that calls everytime a body part changes
   // const { data, isLoading, isError } = useQuery({
@@ -20,14 +22,27 @@ export default function Exercise() {
   // Need another button to change state of Workout day.
 
   // make a array (randNums) with lenght = 6/workoutDay[i].length i here will possibly be a state. This array will have random nums between 1 to 20 as data.
-  function randomIntFromInterval(min: number, max: number) {
+
+  ///UTILITY FUNCTIONS
+  function generateRandNumArray(min: number, max: number) {
+    ////This function generates an array of random numbers
     // min and max included
-    return Math.floor(Math.random() * (max - min + 1) + min)
+    const randNumArr = []
+    function randNum(min: number, max: number) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+
+    for (let i = 0; i < 6 / workoutWeek[day].length; i++) {
+      randNumArr.push(randNum(min, max))
+    }
+    return randNumArr
   }
 
-  const randNum = []
-  for (let i = 0; i < 6 / workoutWeek[day].length; i++) {
-    randNum.push(randomIntFromInterval(1, 20))
+  function increment(num) {
+    return num + 1
+  }
+  function decrement(num) {
+    return num - 1
   }
 
   // ////////////////////////////////////////////////////////////////////////////////
@@ -55,10 +70,43 @@ export default function Exercise() {
   // }, [part])
   // console.log(data)
 
+  function handleChange(e) {
+    if (e.target.innerHTML === 'next') {
+      if (count === randomArr.length - 1) {
+        // checks if is the last element of current part
+        setCount(0)
+        currentPartIndex === workoutWeek[day].length - 1 // checks if current part is the last part for the day
+          ? setcurrentPartIndex(0)
+          : setcurrentPartIndex(increment(currentPartIndex))
+      } else {
+        setCount(increment(count))
+      }
+    }
+    if (e.target.innerHTML === 'prev') {
+      if (count === 0) {
+        // checks if is the first element of current part
+        setCount(randomArr.length - 1)
+        currentPartIndex === 0 // checks if current part is the last part for the day
+          ? setcurrentPartIndex(workoutWeek[day].length - 1)
+          : setcurrentPartIndex(decrement(currentPartIndex))
+      } else {
+        setCount(decrement(count))
+      }
+    }
+  }
+  console.log(count)
+  console.log(currentPartIndex)
+
   return (
     <>
       <h1>Exercise</h1>
       <img src={fakeData.gifUrl} alt="ExerciseGif" />
+      <button className="button prev" onClick={handleChange}>
+        prev
+      </button>
+      <button className="button next" onClick={handleChange}>
+        next
+      </button>
     </>
   )
 }
