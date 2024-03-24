@@ -10,11 +10,9 @@ function ChooseDays() {
     const workoutDay: string = isChecked && e.target.value
     if (workoutDay) {
       workoutDays.includes(workoutDay) || workoutDays.push(workoutDay)
-      console.log(workoutDays)
     } else {
       const index = workoutDays.findIndex((day) => day === nonWorkingDay)
       workoutDays.splice(index, 1)
-      console.log(workoutDays)
     }
   }
 

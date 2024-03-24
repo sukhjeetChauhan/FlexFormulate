@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 function ChooseMuscle() {
   const navigate = useNavigate()
-  const initialCountState = workoutDays.map((day) => 1)
+  const initialCountState = workoutDays.map(() => 1)
 
   const [count, setCount] = useState(initialCountState) // This state will track number of workouts chosen for each day.
 

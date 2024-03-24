@@ -25,7 +25,7 @@ export default function Exercise() {
   // Need another button to change state of Workout day.
 
   ///UTILITY FUNCTIONS
-  // make a array (randNums) with lenght = 6/workoutDay[i].length i here will possibly be a state. This array will have random nums between 1 to 20 as data.
+
   function generateRandNumArray(min: number, max: number) {
     ////This function generates an array of random numbers
     // min and max included
@@ -96,14 +96,42 @@ export default function Exercise() {
       }
     }
   }
-  console.log(count)
-  console.log(currentPartIndex)
-  console.log(data)
+
+  function handleDay(e) {
+    if (e.target.className === 'prevDay') {
+      day === 0 ? setDay(workoutDays.length - 1) : setDay(decrement(day))
+    }
+    if (e.target.className === 'nextDay') {
+      day === workoutDays.length - 1 ? setDay(0) : setDay(increment(day))
+    }
+  }
+  // console.log(count)
+  // console.log(currentPartIndex)
+  // console.log(data)
 
   return (
     <>
-      <h1>Exercise</h1>
-      <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" />
+      <h1>{`Day: ${
+        workoutDays[day][0].toUpperCase() + workoutDays[day].slice(1)
+      }`}</h1>
+      <button className="prevDay" onClick={handleDay}>
+        &lt;
+      </button>
+      <button className="nextDay" onClick={handleDay}>
+        &gt;
+      </button>
+      <h2>{fakeData.name.toUpperCase()}</h2>
+      {/* <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" /> */}
+      <img
+        src="../../data/images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
+        alt="ExerciseGif"
+      />
+      {fakeData.instructions.map((item, i) => (
+        // eslint-disable-next-line react/jsx-key
+        <div className="instructions">
+          <p key={i}>{item}</p>
+        </div>
+      ))}
       <button className="button prev" onClick={handleChange}>
         prev
       </button>
