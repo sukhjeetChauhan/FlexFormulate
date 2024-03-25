@@ -1,0 +1,13 @@
+html {
+  font-size: 62.4%;
+}
+
+.container {
+  display: flex;
+  gap: 4rem;
+}
+
+.instructions {
+  font-size: 2rem;
+  height: 100%;
+}

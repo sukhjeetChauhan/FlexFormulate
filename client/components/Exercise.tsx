@@ -1,4 +1,3 @@
-import request from 'superagent'
 import getExercise from '../api/exerciseApi'
 import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
@@ -7,19 +6,25 @@ import { workoutWeek, workoutDays } from '../../data/general'
 export default function Exercise() {
   const [day, setDay] = useState(0) //workoutDays[0]
   const [count, setCount] = useState(0) // This state tracks workout
-  const [randomArr, setRandomArr] = useState(generateRandNumArray(1, 20))
+  const [randomArr, setRandomArr] = useState(generateRandNumArray(0, 19))
   const [currentPartIndex, setcurrentPartIndex] = useState(0) //workoutWeek[day][0]
 
   // Need to define a function that calls everytime a body part changes
+
+  // const part = workoutWeek[day][currentPartIndex]
   // const { data, isLoading, isError } = useQuery({
-  //   queryKey: ['exercise', currentPartIndex],
+  //   queryKey: ['exercise', part],
   //   queryFn: () => {
-  //     const part = workoutWeek[day][currentPartIndex]
   //     return getExercise(part)
   //   },
-  //   // enabled: !!currentPartIndex,
   // })
+  // if (isLoading) {
+  //   return <h2>Loading...</h2>
+  // }
 
+  // if (isError) {
+  //   return <h2>Error: Api not found</h2>
+  // }
   // Need buttons  to change state of workout day and another state to change state of workout in each day.
   // /while changing the workout button check if state is the last element of randNum, if it is check if we current body part is last element of current workoutDay [i], if it is make count of randNum state back to zero and make part = first part of current day, if it is not then go to the next part and make count of randNum to 0.
   // Need another button to change state of Workout day.
@@ -105,10 +110,8 @@ export default function Exercise() {
       day === workoutDays.length - 1 ? setDay(0) : setDay(increment(day))
     }
   }
-  // console.log(count)
-  // console.log(currentPartIndex)
-  // console.log(data)
 
+  // if (data) {
   return (
     <>
       <h1>{`Day: ${
@@ -122,16 +125,24 @@ export default function Exercise() {
       </button>
       <h2>{fakeData.name.toUpperCase()}</h2>
       {/* <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" /> */}
-      <img
-        src="../../data/images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
-        alt="ExerciseGif"
-      />
-      {fakeData.instructions.map((item, i) => (
-        // eslint-disable-next-line react/jsx-key
+      <div className="container">
+        <img
+          src="../../data/images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
+          alt="ExerciseGif"
+        />
         <div className="instructions">
-          <p key={i}>{item}</p>
+          {fakeData.instructions.map((item, i) => (
+            // eslint-disable-next-line react/jsx-key
+            <p key={i}>{item}</p>
+          ))}
         </div>
-      ))}
+      </div>
+      {/* {data[randomArr[count]]?.instructions.map((item, i) => (
+          // eslint-disable-next-line react/jsx-key
+          <div className="instructions">
+            <p key={i}>{item}</p>
+          </div>
+        ))} */}
       <button className="button prev" onClick={handleChange}>
         prev
       </button>
@@ -141,3 +152,4 @@ export default function Exercise() {
     </>
   )
 }
+// }
