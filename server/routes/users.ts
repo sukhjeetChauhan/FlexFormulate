@@ -19,10 +19,10 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    cosnt
-    const users = await db.getUserById(id)
+    const id = Number(req.params.id)
+    const user = await db.getUserById(id)
 
-    res.json(users)
+    res.json(user)
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: 'Something went wrong' })
@@ -33,6 +33,31 @@ router.post('/', async (req, res) => {
   try {
     const data = req.body
     await db.addUser(data)
+
+    res.sendStatus(200)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    const data = req.body
+    await db.updateUserById(id, data)
+
+    res.sendStatus(200)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    await db.delUserById(id)
 
     res.sendStatus(200)
   } catch (error) {

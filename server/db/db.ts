@@ -20,7 +20,7 @@ export async function delUserById(id: number) {
   await db('users').del().where({ id })
 }
 
-export async function getAllschedules() {
+export async function getAllSchedules() {
   return await db('schedules').select()
 }
 
@@ -40,7 +40,7 @@ export async function delScheduleById(id: number) {
   await db('schedules').del().where({ id })
 }
 
-export async function getAllcalories() {
+export async function getAllCalories() {
   return await db('calories').select()
 }
 
