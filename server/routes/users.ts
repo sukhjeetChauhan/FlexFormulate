@@ -17,11 +17,24 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const users = await db.getAllUsers()
+    cosnt
+    const users = await db.getUserById(id)
 
     res.json(users)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
+router.post('/', async (req, res) => {
+  try {
+    const data = req.body
+    await db.addUser(data)
+
+    res.sendStatus(200)
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: 'Something went wrong' })
