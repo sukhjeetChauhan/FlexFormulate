@@ -1,13 +1,11 @@
 import express from 'express'
 import * as Path from 'node:path'
-
-
+import users from './routes/users'
 
 const server = express()
 
 server.use(express.json())
-
-
+server.use('/api/v1/users', users)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
