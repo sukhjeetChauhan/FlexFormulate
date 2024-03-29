@@ -8,6 +8,10 @@ const useIsAuthenticated = () => {
   // return true
 }
 
+const useReturningUser = () => {
+  const { user } = useAuth0()
+}
+
 interface Props {
   children: React.ReactNode
 }
