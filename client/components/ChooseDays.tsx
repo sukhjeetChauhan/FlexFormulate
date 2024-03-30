@@ -35,7 +35,7 @@ function ChooseDays() {
         </div>
       ))}
       <button className="day-submit">
-        <Link to="/chooseMuscle">Submit</Link>
+        <Link to="/welcome/chooseMuscle">Submit</Link>
       </button>
     </fieldset>
   )

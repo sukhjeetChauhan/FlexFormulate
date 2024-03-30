@@ -8,8 +8,10 @@ const useIsAuthenticated = () => {
   // return true
 }
 
-const useReturningUser = () => {
+export const useReturningUser = () => {
   const { user } = useAuth0()
+  console.log(user?.sub)
+  // need to match user.sub from auth with user_auth from database
 }
 
 interface Props {

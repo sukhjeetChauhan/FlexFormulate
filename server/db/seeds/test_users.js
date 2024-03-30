@@ -14,6 +14,7 @@ export async function seed(knex) {
       height_cm: 168,
       activity_level: '4-5 times',
       bmr_cals: 1635,
+      user_auth: 'auth0|660758bc095367b2377cb459',
     },
     {
       id: 2,
@@ -23,6 +24,7 @@ export async function seed(knex) {
       height_cm: 180,
       activity_level: '1-3 times',
       bmr_cals: 1755,
+      user_auth: 'auth0|660758bc095367b2377cb459',
     },
     {
       id: 3,
@@ -32,6 +34,7 @@ export async function seed(knex) {
       height_cm: 180,
       activity_level: 'no exercise',
       bmr_cals: 1815,
+      user_auth: 'auth0|660758bc095367b2377cb459',
     },
     {
       id: 4,
@@ -41,6 +44,7 @@ export async function seed(knex) {
       height_cm: 168,
       activity_level: '1-3 times',
       bmr_cals: 1399,
+      user_auth: 'auth0|660758bc095367b2377cb459',
     },
     {
       id: 5,
@@ -50,6 +54,7 @@ export async function seed(knex) {
       height_cm: 160,
       activity_level: '1-3 times',
       bmr_cals: 1364,
+      user_auth: 'auth0|660758bc095367b2377cb459',
     },
     {
       id: 6,
@@ -59,6 +64,7 @@ export async function seed(knex) {
       height_cm: 175,
       activity_level: 'no exercise',
       bmr_cals: 1438,
+      user_auth: 'auth0|660758bc095367b2377cb459',
     },
   ])
 }
