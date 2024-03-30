@@ -11,6 +11,7 @@ export function up(knex) {
     table.integer('height_cm')
     table.string('activity_level')
     table.integer('bmr_cals')
+    table.string('user_auth')
   })
 }
 

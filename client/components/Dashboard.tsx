@@ -1,4 +1,3 @@
-import { User } from '@auth0/auth0-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
