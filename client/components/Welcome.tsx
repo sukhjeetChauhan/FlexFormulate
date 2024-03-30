@@ -26,7 +26,7 @@ export default function Welcome() {
     return (
       <>
         <h1>Welcome back {user?.nickname}</h1>
-        <Dashboard />
+        <Dashboard data={data} />
       </>
     )
   } else {
