@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import * as db from '../db/db'
+import * as dbOps from '../db/specificDB'
 
 const router = Router()
 
@@ -29,6 +30,18 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.get('/auth/:authId', async (req, res) => {
+  try {
+    const id = req.params.authId
+    const user = await dbOps.getUsersByAuth(id)
+
+    res.json(user)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
 router.post('/', async (req, res) => {
   try {
     const data = req.body
@@ -41,7 +54,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   try {
     const id = Number(req.params.id)
     const data = req.body

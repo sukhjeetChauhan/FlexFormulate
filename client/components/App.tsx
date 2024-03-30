@@ -10,7 +10,7 @@ function App() {
   //     <Outlet />
   //   </>
   // )
-  const { user, logout, loginWithRedirect } = useAuth0()
+  const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0()
   // TODO: replace placeholder user object with the one from auth0
   // const user = {
   //   nickname: 'john.doe',
