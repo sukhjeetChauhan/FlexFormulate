@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+
 import { getScheduleById } from '../api/scheduleDbApi'
 import Exercise from './Exercise'
 
@@ -20,15 +20,12 @@ export default function Dashboard({ data }) {
   }, [])
 
   console.log(preference)
-  // const navigate = useNavigate()
-  // function handleClick() {
-  //   navigate('/Exercise')
-  // }
+
   return (
     <>
-      <h1>Profile Page</h1>
       {showProfile && (
         <div className="profile">
+          <h1>Profile Page</h1>
           <p>Name : {data[user].name}</p>
           <p>Age : {data[user].age}</p>
           <p>Weight : {`${data[user].weight_kgs} kg`}</p>
