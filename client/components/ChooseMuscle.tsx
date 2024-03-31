@@ -1,6 +1,7 @@
 // import { workoutDays, workoutWeek } from '../../data/general'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { addSchedule } from '../api/scheduleDbApi'
 
 function ChooseMuscle({ val: workoutDays }) {
   const navigate = useNavigate()
@@ -40,19 +41,24 @@ function ChooseMuscle({ val: workoutDays }) {
   }
 
   function handleChange(e) {
-    console.log(e.target)
+    console.log(e.target.value)
   }
 
   function handleData(e) {
     e.preventDefault()
-    workoutDays.forEach((day, index) => {
+    const workoutWeek = {}
+    workoutDays.forEach((day: string, index: number) => {
       const res = []
       for (let i = 0; i < count[index]; i++) {
         res.push(e.target[`${day}${i}`].value)
       }
-      workoutWeek.push(res)
+      const val = res.join('_')
+      workoutWeek[day] = val
     })
-    navigate('/Exercise')
+    workoutWeek.created_by = 2
+    addSchedule(workoutWeek)
+    // navigate('/Exercise')
+    console.log(workoutWeek)
   }
 
   const result =

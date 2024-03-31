@@ -4,22 +4,20 @@ import {
   Route,
 } from 'react-router-dom'
 import App from './components/App.tsx'
-import ChooseDays from './components/ChooseDays.jsx'
-import ChooseMuscle from './components/ChooseMuscle.tsx'
+
 import Exercise from './components/Exercise.tsx'
 import Welcome from './components/Welcome.tsx'
-import Dashboard from './components/Dashboard.tsx'
+
 import NewUserForm from './components/NewUserForm.tsx'
+import { AddDetailsForm } from './components/AddDetailsForm.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />} />
       <Route path="/welcome" element={<Welcome />} />
-      <Route path="/newUserForm" element={<NewUserForm />}>
-        <Route path="/newUserForm/chooseDays" element={<ChooseDays />} />
-        <Route path="/newUserForm/chooseMuscle" element={<ChooseMuscle />} />
-      </Route>
+      <Route path="/newUserForm" element={<NewUserForm />} />
+      <Route path="/addUser" element={<AddDetailsForm />} />
 
       <Route path="/exercise" element={<Exercise />} />
     </>,

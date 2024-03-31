@@ -34,7 +34,7 @@ export default function Welcome() {
       <>
         <h1>Welcome {user?.nickname}</h1>
         <p>
-          <Link to="/newUserForm">Click here</Link>
+          <Link to="/addUser">Click here</Link>
         </p>
         <Outlet />
       </>
