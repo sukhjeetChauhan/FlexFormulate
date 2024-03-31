@@ -8,6 +8,7 @@ import ChooseDays from './components/ChooseDays.jsx'
 import ChooseMuscle from './components/ChooseMuscle.tsx'
 import Exercise from './components/Exercise.tsx'
 import Welcome from './components/Welcome.tsx'
+import Dashboard from './components/Dashboard.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +18,8 @@ const router = createBrowserRouter(
         <Route path="/welcome/chooseDays" element={<ChooseDays />} />
         <Route path="/welcome/chooseMuscle" element={<ChooseMuscle />} />
       </Route>
-      <Route path="/Exercise" element={<Exercise />} />
+
+      <Route path="/exercise" element={<Exercise />} />
     </>,
   ),
 )

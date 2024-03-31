@@ -1,26 +1,20 @@
 import getExercise from '../api/exerciseApi'
-import { useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 // import { workoutWeek, workoutDays } from '../../data/general'
 import { getScheduleById } from '../api/scheduleDbApi'
 import { useGetById } from './Hooks'
 import { workoutDays, workoutWeek } from '../../data/general'
+import { PreferencesContext } from './Dashboard'
 
 export default function Exercise() {
-  const [schedule, setSchedule] = useState({})
+  const schedule = useContext(PreferencesContext)
+  console.log(schedule)
+  // const [schedule, setSchedule] = useState({})
   const [day, setDay] = useState(0) //workoutDays[0]
   const [count, setCount] = useState(0) // This state tracks workout
   const [currentPartIndex, setcurrentPartIndex] = useState(0) //workoutWeek[day][0]
   // const [randomArr, setRandomArr] = useState(generateRandNumArray(0, 19))
-
-  // const { data } = useGetById(getScheduleById(1), 'schedule')
-  useEffect(() => {
-    getScheduleById(1)
-      .then((res) => setSchedule({ res }))
-      .catch((e) => {
-        console.log('error', e)
-      })
-  }, [])
 
   console.log(schedule)
 
@@ -57,6 +51,7 @@ export default function Exercise() {
   // // Need buttons  to change state of workout day and another state to change state of workout in each day.
   // // /while changing the workout button check if state is the last element of randNum, if it is check if we current body part is last element of current workoutDay [i], if it is make count of randNum state back to zero and make part = first part of current day, if it is not then go to the next part and make count of randNum to 0.
   // // Need another button to change state of Workout day.
+  return <h1>Hello</h1>
 }
 
 // ///UTILITY FUNCTIONS
