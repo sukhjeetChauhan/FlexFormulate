@@ -9,3 +9,5 @@ Design your own fitness plan
 ## auth0 signed out on page refresh
 
 ## knex seed order issue
+
+## issue with async data

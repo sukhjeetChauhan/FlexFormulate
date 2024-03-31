@@ -23,6 +23,23 @@ export default function Dashboard({ data }) {
 
   return (
     <>
+      <button
+        onClick={() => {
+          setShowExercise(!showExercise)
+          setShowProfile(false)
+        }}
+      >
+        Exercises
+      </button>
+      <button
+        onClick={() => {
+          setShowProfile(!showProfile)
+          setShowExercise(false)
+        }}
+      >
+        Profile
+      </button>
+      <button>Diet</button>
       {showProfile && (
         <div className="profile">
           <h1>Profile Page</h1>
@@ -38,24 +55,7 @@ export default function Dashboard({ data }) {
           {/* Render Exercise component only when showExercise is true */}
           {showExercise && <Exercise />}
           {/* Button toggles the visibility of Exercise */}
-          <button
-            onClick={() => {
-              setShowExercise(!showExercise)
-              setShowProfile(false)
-            }}
-          >
-            Exercises
-          </button>
-          <button
-            onClick={() => {
-              setShowProfile(!showProfile)
-              setShowExercise(false)
-            }}
-          >
-            Profile
-          </button>
         </PreferencesContext.Provider>
-        <button>Diet</button>
       </div>
     </>
   )

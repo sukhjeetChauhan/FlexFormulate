@@ -9,14 +9,16 @@ import ChooseMuscle from './components/ChooseMuscle.tsx'
 import Exercise from './components/Exercise.tsx'
 import Welcome from './components/Welcome.tsx'
 import Dashboard from './components/Dashboard.tsx'
+import NewUserForm from './components/NewUserForm.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />} />
-      <Route path="/welcome" element={<Welcome />}>
-        <Route path="/welcome/chooseDays" element={<ChooseDays />} />
-        <Route path="/welcome/chooseMuscle" element={<ChooseMuscle />} />
+      <Route path="/welcome" element={<Welcome />} />
+      <Route path="/newUserForm" element={<NewUserForm />}>
+        <Route path="/newUserForm/chooseDays" element={<ChooseDays />} />
+        <Route path="/newUserForm/chooseMuscle" element={<ChooseMuscle />} />
       </Route>
 
       <Route path="/exercise" element={<Exercise />} />
