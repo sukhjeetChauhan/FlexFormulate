@@ -1,8 +1,18 @@
-import { useState } from 'react'
+import { useState, createContext, useCallback, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getScheduleById } from '../api/scheduleDbApi'
+
+const PreferencesData = createContext(null)
 
 export default function Dashboard({ data }) {
   const [user, setUser] = useState(0)
+  const [preference, setPreference] = useState(null)
+
+  getScheduleById(1)
+    // .then(useCallback((res: SetStateAction<null>) => setPreference(res), []))
+    .catch((e) => {
+      console.log('error', e)
+    })
 
   console.log(data)
   const navigate = useNavigate()
@@ -20,7 +30,9 @@ export default function Dashboard({ data }) {
         <p>BMR : {`${data[user].bmr_cals} calories`}</p>
       </div>
       <div>
-        <button onClick={handleClick}>Exercises</button>
+        <PreferencesData.Provider value={preference}>
+          <button onClick={handleClick}>Exercises</button>
+        </PreferencesData.Provider>
         <button>Diet</button>
       </div>
     </>
