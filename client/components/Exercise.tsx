@@ -1,13 +1,33 @@
 import getExercise from '../api/exerciseApi'
 import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { workoutWeek, workoutDays } from '../../data/general'
+// import { workoutWeek, workoutDays } from '../../data/general'
+import { getScheduleById } from '../api/scheduleDbApi'
+import { useGetById } from './Hooks'
 
 export default function Exercise() {
   const [day, setDay] = useState(0) //workoutDays[0]
   const [count, setCount] = useState(0) // This state tracks workout
   const [randomArr, setRandomArr] = useState(generateRandNumArray(0, 19))
   const [currentPartIndex, setcurrentPartIndex] = useState(0) //workoutWeek[day][0]
+
+  const {
+    data: schedule,
+    isLoading,
+    isError,
+  } = useGetById(getScheduleById(1), 'schedule')
+  console.log(schedule)
+
+  const obj = Object.fromEntries(
+    Object.entries(schedule).filter(([_, v]) => v != null),
+  )
+  const workoutDays = Object.keys(obj).filter(
+    (item) => item !== 'id' && item !== 'created_by',
+  )
+
+  const workoutWeek = Object.values(obj)
+    .filter((item) => isNaN(Number(item)))
+    .map((value: any) => value.split('_'))
 
   // Need to define a function that calls everytime a body part changes
 
@@ -39,7 +59,7 @@ export default function Exercise() {
       return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
-    for (let i = 0; i < 6 / workoutWeek[day].length; i++) {
+    for (let i = 0; i < 6 / workoutWeek[day]?.length; i++) {
       randNumArr.push(randNum(min, max))
     }
     return randNumArr
@@ -82,7 +102,7 @@ export default function Exercise() {
       if (count === randomArr.length - 1) {
         // checks if is the last element of current part
         setCount(0)
-        currentPartIndex === workoutWeek[day].length - 1 // checks if current part is the last part for the day
+        currentPartIndex === workoutWeek[day]?.length - 1 // checks if current part is the last part for the day
           ? setcurrentPartIndex(0)
           : setcurrentPartIndex(increment(currentPartIndex))
       } else {
@@ -94,7 +114,7 @@ export default function Exercise() {
         // checks if is the first element of current part
         setCount(randomArr.length - 1)
         currentPartIndex === 0 // checks if current part is the last part for the day
-          ? setcurrentPartIndex(workoutWeek[day].length - 1)
+          ? setcurrentPartIndex(workoutWeek[day]?.length - 1)
           : setcurrentPartIndex(decrement(currentPartIndex))
       } else {
         setCount(decrement(count))
@@ -104,52 +124,52 @@ export default function Exercise() {
 
   function handleDay(e) {
     if (e.target.className === 'prevDay') {
-      day === 0 ? setDay(workoutDays.length - 1) : setDay(decrement(day))
+      day === 0 ? setDay(workoutDays?.length - 1) : setDay(decrement(day))
     }
     if (e.target.className === 'nextDay') {
-      day === workoutDays.length - 1 ? setDay(0) : setDay(increment(day))
+      day === workoutDays?.length - 1 ? setDay(0) : setDay(increment(day))
     }
   }
 
-  // if (data) {
-  return (
-    <>
-      <h1>{`Day: ${
-        workoutDays[day][0].toUpperCase() + workoutDays[day].slice(1)
-      }`}</h1>
-      <button className="prevDay" onClick={handleDay}>
-        &lt;
-      </button>
-      <button className="nextDay" onClick={handleDay}>
-        &gt;
-      </button>
-      <h2>{fakeData.name.toUpperCase()}</h2>
-      {/* <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" /> */}
-      <div className="container">
-        <img
-          src="../../data/images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
-          alt="ExerciseGif"
-        />
-        <div className="instructions">
-          {fakeData.instructions.map((item, i) => (
-            // eslint-disable-next-line react/jsx-key
-            <p key={i}>{item}</p>
-          ))}
-        </div>
-      </div>
-      {/* {data[randomArr[count]]?.instructions.map((item, i) => (
-          // eslint-disable-next-line react/jsx-key
+  if (schedule) {
+    return (
+      <>
+        <h1>{`Day: ${
+          workoutDays[day][0].toUpperCase() + workoutDays[day].slice(1)
+        }`}</h1>
+        <button className="prevDay" onClick={handleDay}>
+          &lt;
+        </button>
+        <button className="nextDay" onClick={handleDay}>
+          &gt;
+        </button>
+        <h2>{fakeData.name.toUpperCase()}</h2>
+        {/* <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" /> */}
+        <div className="container">
+          <img
+            src="../../data/images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
+            alt="ExerciseGif"
+          />
           <div className="instructions">
-            <p key={i}>{item}</p>
+            {fakeData.instructions.map((item, i) => (
+              // eslint-disable-next-line react/jsx-key
+              <p key={i}>{item}</p>
+            ))}
           </div>
-        ))} */}
-      <button className="button prev" onClick={handleChange}>
-        prev
-      </button>
-      <button className="button next" onClick={handleChange}>
-        next
-      </button>
-    </>
-  )
+        </div>
+        {/* {data[randomArr[count]]?.instructions.map((item, i) => (
+        // eslint-disable-next-line react/jsx-key
+        <div className="instructions">
+        <p key={i}>{item}</p>
+        </div>
+      ))} */}
+        <button className="button prev" onClick={handleChange}>
+          prev
+        </button>
+        <button className="button next" onClick={handleChange}>
+          next
+        </button>
+      </>
+    )
+  }
 }
-// }

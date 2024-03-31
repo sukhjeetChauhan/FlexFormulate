@@ -7,3 +7,5 @@ Design your own fitness plan
 ## getting values out of the form
 
 ## auth0 signed out on page refresh
+
+## knex seed order issue

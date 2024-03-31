@@ -4,7 +4,7 @@ import * as db from '../db/db'
 
 const router = Router()
 
-// /api/v1/users
+// /api/v1/schedules
 
 router.get('/', async (req, res) => {
   try {

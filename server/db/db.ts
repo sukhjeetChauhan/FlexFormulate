@@ -29,7 +29,7 @@ export async function addSchedule(data: any) {
 }
 
 export async function getScheduleById(id: number) {
-  return await db('schedules').where({ id }).select()
+  return await db('schedules').where({ id }).select().first()
 }
 
 export async function updateScheduleById(id: number, data: any) {
