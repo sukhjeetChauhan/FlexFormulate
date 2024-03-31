@@ -2,7 +2,7 @@ import { days } from '../../data/general'
 // import { workoutDays } from '../../data/general'
 import { Link } from 'react-router-dom'
 
-function ChooseDays({ fn: handlerFunction, val: workoutDays }) {
+function ChooseDays({ fn: handlerFunction, val: workoutDays, setStatus }) {
   function handleChange(e: { target: { checked: any; value: any } }) {
     const isChecked = e.target.checked
     const nonWorkingDay = !isChecked && e.target.value
@@ -35,8 +35,8 @@ function ChooseDays({ fn: handlerFunction, val: workoutDays }) {
           </label>
         </div>
       ))}
-      <button className="day-submit">
-        <Link to="/welcome/chooseMuscle">Submit</Link>
+      <button className="day-submit" onClick={() => setStatus(true)}>
+        Submit
       </button>
     </fieldset>
   )

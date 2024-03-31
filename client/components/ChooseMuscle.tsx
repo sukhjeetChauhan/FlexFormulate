@@ -1,13 +1,13 @@
-import { workoutDays, workoutWeek } from '../../data/general'
+// import { workoutDays, workoutWeek } from '../../data/general'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function ChooseMuscle() {
+function ChooseMuscle({ val: workoutDays }) {
   const navigate = useNavigate()
   const initialCountState = workoutDays.map(() => 1)
 
   const [count, setCount] = useState(initialCountState) // This state will track number of workouts chosen for each day.
-
+  const [data, setData] = useState({})
   function insertOptionsHtml(day: string, count: number) {
     const choiceArray = []
     const choice = function (day: string, num: number) {
@@ -16,6 +16,7 @@ function ChooseMuscle() {
           key={`${day}-${num}`}
           className={`${day}-${num} options`}
           name={`${day}${num}`}
+          onChange={handleChange}
         >
           <option value="">Select your muscle</option>
           <option value="back">Back</option>
@@ -36,6 +37,10 @@ function ChooseMuscle() {
       choiceArray.push(choice(day, i))
     }
     return choiceArray
+  }
+
+  function handleChange(e) {
+    console.log(e.target)
   }
 
   function handleData(e) {
