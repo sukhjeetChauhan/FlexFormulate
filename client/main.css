@@ -106,7 +106,11 @@ body {
   max-width: 50%;
   gap: 1rem;
   align-items: flex-start;
-  background-color: rgba(243, 140, 140, 0.456);
+  background-color: #bfbebe66;
   padding: 3rem;
   font-size: 2rem;
+}
+
+.welcome-heading {
+  font-size: 4rem;
 }

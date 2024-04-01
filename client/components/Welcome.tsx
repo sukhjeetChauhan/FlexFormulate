@@ -23,23 +23,23 @@ export default function Welcome() {
   if (data.length !== 0) {
     const id = data[0].id
     return (
-      <>
+      <div className="div-container">
         <h1 className="welcome-heading">Welcome back {user?.nickname}</h1>
         {/* <Dashboard data={data} /> */}
         <Link to={`/user/${id}`}>
           <h3>Dashboard</h3>
         </Link>
-      </>
+      </div>
     )
   } else {
     return (
-      <>
-        <h1>Welcome {user?.nickname}</h1>
+      <div className="div-container">
+        <h1 className="welcome-heading">Welcome {user?.nickname}</h1>
         <p>
           <Link to="/addUser">Click here</Link>
         </p>
         <Outlet />
-      </>
+      </div>
     )
   }
 }
