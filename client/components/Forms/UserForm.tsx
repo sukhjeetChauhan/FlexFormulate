@@ -14,27 +14,35 @@ export default function UserForm() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    setData({...data,[e.target.name]: e.target.value})
+    console.log(data)
   }
 
   function handleChange(e) {
-    console.log(e.target.value)
+    setData({ ...data, [e.target.name]: e.target.value })
+    console.log(data)
   }
 
   return (
     <form className="user-form" onSubmit={handleSubmit}>
       <label htmlFor="name">Name:</label>
       <input
-      name='name'
+        name="name"
         id="name"
         type="text"
         placeholder="Full Name"
         onChange={handleChange}
       />
       <label htmlFor="age">Age:</label>
-      <input id="age" type="text" placeholder="Age" onChange={handleChange} />
+      <input
+        name="age"
+        id="age"
+        type="text"
+        placeholder="Age"
+        onChange={handleChange}
+      />
       <label htmlFor="weight">Weight:</label>
       <input
+        name="weight_kgs"
         id="weight"
         type="Weight"
         placeholder="Weight in Kgs"
@@ -42,6 +50,7 @@ export default function UserForm() {
       />
       <label htmlFor="height">Height:</label>
       <input
+        name="height_cm"
         id="height"
         type="text"
         placeholder="Height in cms"
@@ -52,7 +61,7 @@ export default function UserForm() {
       <input
         id="low"
         type="radio"
-        name="activity-level"
+        name="activity_level"
         value="no exercise"
         onChange={handleChange}
       />
@@ -60,7 +69,7 @@ export default function UserForm() {
       <input
         id="med"
         type="radio"
-        name="activity-level"
+        name="activity_level"
         value="1 - 3 times"
         onChange={handleChange}
       />
@@ -68,7 +77,7 @@ export default function UserForm() {
       <input
         id="high"
         type="radio"
-        name="activity-level"
+        name="activity_level"
         value="4 - 5 times"
         onChange={handleChange}
       />
