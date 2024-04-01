@@ -1,21 +1,16 @@
 import Welcome from './Welcome'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import { useEffect, useState } from 'react'
 function App() {
-  // return (
-  //   <>
-  //     <h1>
-  //       <Link to="/chooseDays">Fitness Page</Link>
-  //     </h1>
-  //     <Outlet />
-  //   </>
-  // )
-  const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0()
-  // TODO: replace placeholder user object with the one from auth0
-  // const user = {
-  //   nickname: 'john.doe',
-  // }
+  const [css, setCss] = useState('signedOut')
 
+  const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0()
+  useEffect(() => {
+    if (isAuthenticated) {
+      setCss('signedIn')
+    }
+  }, [isAuthenticated])
   const handleSignOut = async () => {
     await logout()
   }
@@ -25,18 +20,24 @@ function App() {
   }
 
   return (
-    <>
-      <h1>Fitness Page</h1>
+    <div className={css}>
+      <h1 className="app-heading">Design your own health</h1>
       <IfAuthenticated>
-        {user && <p>Signed in as: {user?.nickname}</p>}
+        <div className="user-info">
+          {user && <p>Signed in as: {user?.nickname}</p>}
 
-        <button onClick={handleSignOut}>Sign out</button>
+          <button className="btn-signOut" onClick={handleSignOut}>
+            Sign out
+          </button>
+        </div>
         <Welcome />
       </IfAuthenticated>
       <IfNotAuthenticated>
-        <button onClick={handleSignIn}>Sign in</button>
+        <button className="btn-signIn" onClick={handleSignIn}>
+          Sign in
+        </button>
       </IfNotAuthenticated>
-    </>
+    </div>
   )
 }
 export default App

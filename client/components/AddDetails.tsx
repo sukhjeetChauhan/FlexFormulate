@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import UserForm from './Forms/UserForm'
+import AddUser from './Forms/AddUser'
 
 export function AddDetails() {
   return (
-    <>
-      <UserForm />
-    </>
+    <div className="div-container">
+      <AddUser />
+    </div>
   )
 }

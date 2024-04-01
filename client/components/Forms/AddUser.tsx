@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { addUser } from '../../api/userDbApi'
 
-export default function UserForm() {
+export default function AddUser() {
   const navigate = useNavigate()
   const [data, setData] = useState({
     name: null,
@@ -22,7 +22,7 @@ export default function UserForm() {
     const postData = { ...data, bmr_cals: calculateBMR(), user_auth: auth }
 
     addUser(postData)
-    navigate('/welcome')
+    navigate('/newUserForm')
   }
 
   function handleChange(e) {

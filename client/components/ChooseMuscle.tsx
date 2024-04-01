@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { addSchedule } from '../api/scheduleDbApi'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useGetUserByAuth } from './Hooks'
 
 function ChooseMuscle({ val: workoutDays }) {
   const navigate = useNavigate()
@@ -9,6 +11,14 @@ function ChooseMuscle({ val: workoutDays }) {
 
   const [count, setCount] = useState(initialCountState) // This state will track number of workouts chosen for each day.
   const [data, setData] = useState({})
+
+  const { user } = useAuth0()
+
+  const authId = user?.sub
+
+  const { data: currentUser, isLoading, isError } = useGetUserByAuth(authId)
+
+  // ///////////////////////////////////////////////////////////////////////////////////////
   function insertOptionsHtml(day: string, count: number) {
     const choiceArray = []
     const choice = function (day: string, num: number) {
@@ -40,6 +50,8 @@ function ChooseMuscle({ val: workoutDays }) {
     return choiceArray
   }
 
+  // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   function handleChange(e) {
     console.log(e.target.value)
   }
@@ -55,9 +67,9 @@ function ChooseMuscle({ val: workoutDays }) {
       const val = res.join('_')
       workoutWeek[day] = val
     })
-    workoutWeek.created_by = 2
+    workoutWeek.created_by = currentUser[0]?.id
     addSchedule(workoutWeek)
-    // navigate('/Exercise')
+    navigate(`/user/${currentUser[0]?.id}`)
     console.log(workoutWeek)
   }
 
@@ -75,7 +87,7 @@ function ChooseMuscle({ val: workoutDays }) {
                   type="button"
                   onClick={() => {
                     const array = count.map((num, index) => {
-                      const result = i === index ? num + 1 : num // adds 1 to the element whose add button is clicked.
+                      const result = i === index && num < 3 ? num + 1 : num // adds 1 to the element whose add button is clicked.
 
                       return result
                     })
@@ -87,6 +99,20 @@ function ChooseMuscle({ val: workoutDays }) {
                 >
                   +
                 </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const array = count.map((num, index) => {
+                      const result = i === index && num > 1 ? num - 1 : num // subtract 1 to the element whose sub button is clicked.
+
+                      return result
+                    })
+                    setCount(array)
+                  }}
+                  className={`sub sub-${day}`}
+                >
+                  -
+                </button>
               </div>
             </div>
           ))}
@@ -96,7 +122,12 @@ function ChooseMuscle({ val: workoutDays }) {
         </form>
       </fieldset>
     ) : (
-      <h1>No Workout days selected </h1>
+      <>
+        <h1>No Workout days selected </h1>
+        <button>
+          <link to="/newUserForm">Go Back</link>
+        </button>
+      </>
     )
   return result
 }

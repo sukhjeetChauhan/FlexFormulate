@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 // import { workoutWeek, workoutDays } from '../../data/general'
 import { getScheduleById } from '../api/scheduleDbApi'
 import { useGetById } from './Hooks'
-import { workoutDays, workoutWeek } from '../../data/general'
+// import { workoutDays, workoutWeek } from '../../data/general'
 import { PreferencesContext } from './Dashboard'
 
 export default function Exercise() {
@@ -28,20 +28,20 @@ export default function Exercise() {
 
   // // Need to define a function that calls everytime a body part changes
 
-  // // const part = workoutWeek[day][currentPartIndex]
-  // // const { data, isLoading, isError } = useQuery({
-  // //   queryKey: ['exercise', part],
-  // //   queryFn: () => {
-  // //     return getExercise(part)
-  // //   },
-  // // })
-  // // if (isLoading) {
-  // //   return <h2>Loading...</h2>
-  // // }
+  const part = workoutWeek[day][currentPartIndex]
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['exercise', part],
+    queryFn: () => {
+      return getExercise(part)
+    },
+  })
+  if (isLoading) {
+    return <h2>Loading...</h2>
+  }
 
-  // // if (isError) {
-  // //   return <h2>Error: Api not found</h2>
-  // // }
+  if (isError) {
+    return <h2>Error: Api not found</h2>
+  }
   // // Need buttons  to change state of workout day and another state to change state of workout in each day.
   // // /while changing the workout button check if state is the last element of randNum, if it is check if we current body part is last element of current workoutDay [i], if it is make count of randNum state back to zero and make part = first part of current day, if it is not then go to the next part and make count of randNum to 0.
   // // Need another button to change state of Workout day.
@@ -130,43 +130,45 @@ export default function Exercise() {
     }
   }
 
-  return (
-    <>
-      <h1>{`Day: ${
-        workoutDays[day][0]?.toUpperCase() + workoutDays[day]?.slice(1)
-      }`}</h1>
-      <button className="prevDay" onClick={handleDay}>
-        &lt;
-      </button>
-      <button className="nextDay" onClick={handleDay}>
-        &gt;
-      </button>
-      <h2>{fakeData.name.toUpperCase()}</h2>
-      {/* <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" /> */}
-      <div className="container">
+  if (data) {
+    return (
+      <>
+        <h1>{`Day: ${
+          workoutDays[day][0]?.toUpperCase() + workoutDays[day]?.slice(1)
+        }`}</h1>
+        <button className="prevDay" onClick={handleDay}>
+          &lt;
+        </button>
+        <button className="nextDay" onClick={handleDay}>
+          &gt;
+        </button>
+        <h2>{data[randomArr[count]]?.name.toUpperCase()}</h2>
+        <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" />
+        {/* <div className="container">
         <img
           src="../../data/images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
           alt="ExerciseGif"
-        />
-        <div className="instructions">
+          /> */}
+        {/* <div className="instructions">
           {fakeData.instructions.map((item, i) => (
             // eslint-disable-next-line react/jsx-key
             <p key={i}>{item}</p>
-          ))}
+            ))}
         </div>
-      </div>
-      {/* {data[randomArr[count]]?.instructions.map((item, i) => (
-        // eslint-disable-next-line react/jsx-key
-        <div className="instructions">
-        <p key={i}>{item}</p>
-        </div>
-      ))} */}
-      <button className="button prev" onClick={handleChange}>
-        prev
-      </button>
-      <button className="button next" onClick={handleChange}>
-        next
-      </button>
-    </>
-  )
+      </div> */}
+        {data[randomArr[count]]?.instructions.map((item, i) => (
+          // eslint-disable-next-line react/jsx-key
+          <div className="instructions">
+            <p key={i}>{item}</p>
+          </div>
+        ))}
+        <button className="button prev" onClick={handleChange}>
+          prev
+        </button>
+        <button className="button next" onClick={handleChange}>
+          next
+        </button>
+      </>
+    )
+  }
 }

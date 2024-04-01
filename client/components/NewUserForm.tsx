@@ -10,13 +10,13 @@ export default function NewUserForm() {
     setWorkoutDays(data)
   }
   return (
-    <>
+    <div className="div-container">
       <ChooseDays
         fn={handlerFunction}
         val={workoutDays}
         setStatus={setStatus}
       />
       {status && <ChooseMuscle val={workoutDays} />}
-    </>
+    </div>
   )
 }

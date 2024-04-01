@@ -28,8 +28,8 @@ export async function addSchedule(data: any) {
   await db('schedules').insert(data)
 }
 
-export async function getScheduleById(id: number) {
-  return await db('schedules').where({ id }).select().first()
+export async function getScheduleByUserId(id: number) {
+  return await db('schedules').where('created_by', id).select().first()
 }
 
 export async function updateScheduleById(id: number, data: any) {

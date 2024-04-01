@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const id = Number(req.params.id)
-    const schedule = await db.getScheduleById(id)
+    const schedule = await db.getScheduleByUserId(id)
 
     res.json(schedule)
   } catch (error) {
