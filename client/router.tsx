@@ -9,7 +9,7 @@ import Exercise from './components/Exercise.tsx'
 import Welcome from './components/Welcome.tsx'
 
 import NewUserForm from './components/NewUserForm.tsx'
-import { AddDetailsForm } from './components/AddDetailsForm.tsx'
+import { AddDetails } from './components/AddDetails.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +17,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<App />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/newUserForm" element={<NewUserForm />} />
-      <Route path="/addUser" element={<AddDetailsForm />} />
+      <Route path="/addUser" element={<AddDetails />} />
 
       <Route path="/exercise" element={<Exercise />} />
     </>,
