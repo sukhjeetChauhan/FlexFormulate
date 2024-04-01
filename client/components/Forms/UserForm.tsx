@@ -1,6 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { addUser } from '../../api/userDbApi'
 
 export default function UserForm() {
   const navigate = useNavigate()
@@ -19,7 +20,9 @@ export default function UserForm() {
     e.preventDefault()
 
     const postData = { ...data, bmr_cals: calculateBMR(), user_auth: auth }
-    console.log(postData)
+
+    addUser(postData)
+    navigate('/welcome')
   }
 
   function handleChange(e) {
