@@ -9,6 +9,7 @@ export async function seed(knex) {
     {
       id: 1,
       name: 'John Keys',
+      gender: 'male',
       age: 18,
       weight_kgs: 67,
       height_cm: 168,
@@ -19,6 +20,7 @@ export async function seed(knex) {
     {
       id: 2,
       name: 'Christopher Luxton',
+      gender: 'male',
       age: 25,
       weight_kgs: 75,
       height_cm: 180,
@@ -29,6 +31,7 @@ export async function seed(knex) {
     {
       id: 3,
       name: 'Winston Peters',
+      gender: 'male',
       age: 33,
       weight_kgs: 85,
       height_cm: 180,
@@ -39,6 +42,7 @@ export async function seed(knex) {
     {
       id: 4,
       name: 'Jacinda Arden',
+      gender: 'female',
       age: 18,
       weight_kgs: 60,
       height_cm: 168,
@@ -49,6 +53,7 @@ export async function seed(knex) {
     {
       id: 5,
       name: 'Judith Colins',
+      gender: 'female',
       age: 25,
       weight_kgs: 65,
       height_cm: 160,
@@ -59,6 +64,7 @@ export async function seed(knex) {
     {
       id: 6,
       name: 'Helen Clark',
+      gender: 'female',
       age: 40,
       weight_kgs: 75,
       height_cm: 175,
