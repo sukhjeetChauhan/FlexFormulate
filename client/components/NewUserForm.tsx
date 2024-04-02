@@ -11,6 +11,7 @@ export default function NewUserForm() {
   }
   return (
     <div className="div-container">
+      <h1>User Exercise Preferences</h1>
       <ChooseDays
         fn={handlerFunction}
         val={workoutDays}

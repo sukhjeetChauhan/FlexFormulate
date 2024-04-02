@@ -4,6 +4,7 @@ html {
 
 body {
   margin: 0 auto;
+  font-size: 1.5rem;
 }
 
 .container {
@@ -41,7 +42,7 @@ body {
 }
 
 .div-container {
-  max-width: 140rem;
+  max-width: 135rem;
   margin: 10rem auto;
 }
 
@@ -113,4 +114,19 @@ body {
 
 .welcome-heading {
   font-size: 4rem;
+}
+.trends {
+  background-color: black;
+  color: #fff;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.btn-setup {
+  padding: 1rem 2rem;
+  cursor: pointer;
 }

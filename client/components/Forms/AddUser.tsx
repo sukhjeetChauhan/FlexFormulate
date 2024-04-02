@@ -43,86 +43,89 @@ export default function AddUser() {
   }
 
   return (
-    <form className="user-form" onSubmit={handleSubmit}>
-      <label htmlFor="name">Name:</label>
-      <input
-        name="name"
-        id="name"
-        type="text"
-        placeholder="Full Name"
-        onChange={handleChange}
-      />
-      <label htmlFor="age">Age:</label>
-      <input
-        name="age"
-        id="age"
-        type="number"
-        placeholder="Age"
-        onChange={handleChange}
-      />
-      <div>
-        <p>Please Select your gender?</p>
-        <label htmlFor="male">Male:</label>
+    <div className="div-container">
+      <h1>User Detail Form</h1>
+      <form className="user-form" onSubmit={handleSubmit}>
+        <label htmlFor="name">Name:</label>
         <input
-          name="gender"
-          id="male"
-          type="radio"
-          value="male"
+          name="name"
+          id="name"
+          type="text"
+          placeholder="Full Name"
           onChange={handleChange}
         />
-        <label htmlFor="female">Female:</label>
+        <label htmlFor="age">Age:</label>
         <input
-          name="gender"
-          id="female"
-          type="radio"
-          value="female"
+          name="age"
+          id="age"
+          type="number"
+          placeholder="Age"
           onChange={handleChange}
         />
-      </div>
-      <label htmlFor="weight">Weight:</label>
-      <input
-        name="weight_kgs"
-        id="weight"
-        type="number"
-        placeholder="Weight in Kgs"
-        onChange={handleChange}
-      />
-      <label htmlFor="height">Height:</label>
-      <input
-        name="height_cm"
-        id="height"
-        type="number"
-        placeholder="Height in cms"
-        onChange={handleChange}
-      />
-      <div>
-        <p>What is your current activity level?</p>
-        <label htmlFor="low">No Exercise</label>
+        <div>
+          <p>Please Select your gender?</p>
+          <label htmlFor="male">Male:</label>
+          <input
+            name="gender"
+            id="male"
+            type="radio"
+            value="male"
+            onChange={handleChange}
+          />
+          <label htmlFor="female">Female:</label>
+          <input
+            name="gender"
+            id="female"
+            type="radio"
+            value="female"
+            onChange={handleChange}
+          />
+        </div>
+        <label htmlFor="weight">Weight:</label>
         <input
-          id="low"
-          type="radio"
-          name="activity_level"
-          value="no exercise"
+          name="weight_kgs"
+          id="weight"
+          type="number"
+          placeholder="Weight in Kgs"
           onChange={handleChange}
         />
-        <label htmlFor="med">1 - 3 times</label>
+        <label htmlFor="height">Height:</label>
         <input
-          id="med"
-          type="radio"
-          name="activity_level"
-          value="1 - 3 times"
+          name="height_cm"
+          id="height"
+          type="number"
+          placeholder="Height in cms"
           onChange={handleChange}
         />
-        <label htmlFor="high">4 - 5 times</label>
-        <input
-          id="high"
-          type="radio"
-          name="activity_level"
-          value="4 - 5 times"
-          onChange={handleChange}
-        />
-      </div>
-      <button>Submit</button>
-    </form>
+        <div>
+          <p>What is your current activity level?</p>
+          <label htmlFor="low">No Exercise</label>
+          <input
+            id="low"
+            type="radio"
+            name="activity_level"
+            value="no exercise"
+            onChange={handleChange}
+          />
+          <label htmlFor="med">1 - 3 times</label>
+          <input
+            id="med"
+            type="radio"
+            name="activity_level"
+            value="1 - 3 times"
+            onChange={handleChange}
+          />
+          <label htmlFor="high">4 - 5 times</label>
+          <input
+            id="high"
+            type="radio"
+            name="activity_level"
+            value="4 - 5 times"
+            onChange={handleChange}
+          />
+        </div>
+        <button>Submit</button>
+      </form>
+    </div>
   )
 }

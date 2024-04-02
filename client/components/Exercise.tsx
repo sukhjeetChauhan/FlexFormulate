@@ -156,12 +156,12 @@ export default function Exercise() {
             ))}
         </div>
       </div> */}
-        {data[randomArr[count]]?.instructions.map((item, i) => (
-          // eslint-disable-next-line react/jsx-key
-          <div className="instructions">
+        <div className="instructions">
+          {data[randomArr[count]]?.instructions.map((item, i) => (
+            // eslint-disable-next-line react/jsx-key
             <p key={i}>{item}</p>
-          </div>
-        ))}
+          ))}
+        </div>
         <button className="button prev" onClick={handleChange}>
           prev
         </button>

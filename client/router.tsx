@@ -17,10 +17,10 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<App />} />
       <Route path="/welcome" element={<Welcome />} />
-      <Route path="/newUserForm" element={<NewUserForm />} />
       <Route path="/addUser" element={<AddDetails />} />
-      <Route path="/exercise" element={<Exercise />} />
       <Route path="/user/:id" element={<Dashboard />} />
+      <Route path="/newUserForm" element={<NewUserForm />} />
+      <Route path="/exercise" element={<Exercise />} />
     </>,
   ),
 )
