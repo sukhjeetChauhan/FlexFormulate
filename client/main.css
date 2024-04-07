@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: 62.4%;
 }
@@ -93,7 +99,9 @@ body {
 
 .dashboard-main {
   border: 2px solid black;
-  padding: 3rem;
+  padding: 4rem;
+  background-color: rgb(2, 2, 102);
+  color: #fff;
 }
 
 .user-form {
@@ -131,14 +139,35 @@ body {
 .exercise-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  background-color: rgb(2, 2, 102);
+  color: black;
 }
 
 .exercise-item {
+  position: relative;
   list-style: none;
+  border: 1px solid black;
+  border-radius: 9px;
+  padding: 2rem;
+  background-color: #fff;
 }
 
 .instructions {
-  display: none;
+  position: absolute;
+  /* display: none; */
   font-size: 2rem;
-  height: 100%;
+
+  bottom: 0;
+}
+
+.instructions > ul {
+  list-style: none;
+}
+
+.prevDay {
+  padding: 0.5rem;
+}
+.nextDay {
+  padding: 0.5rem;
 }

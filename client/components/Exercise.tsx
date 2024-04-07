@@ -18,9 +18,11 @@ export default function Exercise() {
     .map((value: any) => value.split('_'))
 
   const [day, setDay] = useState(0) //workoutDays[0]
-  const [res, setRes] = useState([]) // This state tracks workout
+  const [res, setRes] = useState([]) // This state tracks workout data
   // const [currentPartIndex, setcurrentPartIndex] = useState(0) //workoutWeek[day][0]
-  const [randomArr, setRandomArr] = useState(generateRandNumArray(0, 19))
+  const [randomNumObj, setRandomNumObj] = useState(
+    generateRandNumArrayObject(0, 19),
+  )
 
   // // Need to define a function that calls everytime a body part changes
 
@@ -53,24 +55,27 @@ export default function Exercise() {
 
   // ///UTILITY FUNCTIONS
 
-  function generateRandNumArray(min: number, max: number) {
+  function generateRandNumArrayObject(min: number, max: number) {
     ////This function generates an array of random numbers
     // min and max included
-
-    const randNumArr: number[] = []
     function randNum(min: number, max: number) {
       return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
-    for (let i = 0; i < 6 / workoutWeek[day]?.length; i++) {
-      let num = randNum(min, max)
-      while (randNumArr.includes(num)) {
-        num = randNum(min, max)
+    const randNumArrObj = {}
+    workoutDays.forEach((day, index) => {
+      const randNumArr: number[] = []
+      for (let i = 0; i < 6 / workoutWeek[index]?.length; i++) {
+        let num = randNum(min, max)
+        while (randNumArr.includes(num)) {
+          num = randNum(min, max)
+        }
+        randNumArr.push(num)
       }
-      randNumArr.push(num)
-    }
+      randNumArrObj[day] = randNumArr
+    })
 
-    return randNumArr
+    return randNumArrObj
   }
 
   function increment(num) {
@@ -134,7 +139,7 @@ export default function Exercise() {
     }
   }
   // setRandomArr(generateRandNumArray(1, 19))
-  console.log(day)
+  console.log(res)
 
   if (data)
     return (
@@ -143,22 +148,24 @@ export default function Exercise() {
           workoutDays[day][0]?.toUpperCase() + workoutDays[day]?.slice(1)
         }`}</h1>
         <button className="prevDay" onClick={handleDay}>
-          &lt;
+          ←
         </button>
         <button className="nextDay" onClick={handleDay}>
-          &gt;
+          →
         </button>
         <ul className="exercise-container">
           {res.map((partData) =>
-            randomArr.map((index) => (
+            randomNumObj[workoutDays[day]].map((index) => (
               <li className="exercise-item" key={partData[index].id}>
                 <h2>{partData[index]?.name.toUpperCase()}</h2>
-                <h3>{partData[index]?.bodyPart}</h3>
+                <h3>{partData[index]?.bodyPart.toUpperCase()}</h3>
                 <img src={partData[index]?.gifUrl} alt="ExerciseGif" />
                 <div className="instructions">
-                  {partData[index]?.instructions.map((item, i) => (
-                    <p key={i}>{item}</p>
-                  ))}
+                  <ul>
+                    <li>Sets: 3</li>
+                    <li>Reps: 12</li>
+                    <li>Rest Period: 1 min</li>
+                  </ul>
                 </div>
               </li>
             )),
