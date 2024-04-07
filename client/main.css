@@ -12,11 +12,6 @@ body {
   gap: 4rem;
 }
 
-.instructions {
-  font-size: 2rem;
-  height: 100%;
-}
-
 .signedOut {
   background-image: url('../data/images/main-background.jpg');
   height: 100vh;
@@ -129,4 +124,21 @@ body {
 .btn-setup {
   padding: 1rem 2rem;
   cursor: pointer;
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+/* Exercise container */
+.exercise-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.exercise-item {
+  list-style: none;
+}
+
+.instructions {
+  display: none;
+  font-size: 2rem;
+  height: 100%;
 }

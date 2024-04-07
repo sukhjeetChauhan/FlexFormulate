@@ -1,10 +1,6 @@
 import getExercise from '../api/exerciseApi'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-// import { workoutWeek, workoutDays } from '../../data/general'
-import { getScheduleById } from '../api/scheduleDbApi'
-import { useGetById } from './Hooks'
-// import { workoutDays, workoutWeek } from '../../data/general'
 import { PreferencesContext } from './Dashboard'
 
 export default function Exercise() {
@@ -22,19 +18,28 @@ export default function Exercise() {
     .map((value: any) => value.split('_'))
 
   const [day, setDay] = useState(0) //workoutDays[0]
-  const [count, setCount] = useState(0) // This state tracks workout
-  const [currentPartIndex, setcurrentPartIndex] = useState(0) //workoutWeek[day][0]
+  const [res, setRes] = useState([]) // This state tracks workout
+  // const [currentPartIndex, setcurrentPartIndex] = useState(0) //workoutWeek[day][0]
   const [randomArr, setRandomArr] = useState(generateRandNumArray(0, 19))
 
   // // Need to define a function that calls everytime a body part changes
 
-  const part = workoutWeek[day][currentPartIndex]
+  // const part = workoutWeek[day][currentPartIndex]
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['exercise', part],
+    queryKey: ['exercise', day],
     queryFn: () => {
-      return getExercise(part)
+      return getExercise(workoutWeek[day])
     },
   })
+
+  useEffect(() => {
+    Promise.all(data)
+      .then((res) => {
+        setRes(res)
+      })
+      .catch((e) => console.log(e))
+  }, [data])
+
   if (isLoading) {
     return <h2>Loading...</h2>
   }
@@ -63,6 +68,7 @@ export default function Exercise() {
 
     return randNumArr
   }
+  console.log(randomArr)
 
   function increment(num) {
     return num + 1
@@ -91,35 +97,30 @@ export default function Exercise() {
     target: 'pectorals',
   }
 
-  // // useEffect(() => {
-  // //   console.log(workoutWeek)
-  // // }, [part])
-  // // console.log(data)
-
-  function handleChange(e) {
-    if (e.target.innerHTML === 'next') {
-      if (count === randomArr.length - 1) {
-        // checks if is the last element of current part
-        setCount(0)
-        currentPartIndex === workoutWeek[day]?.length - 1 // checks if current part is the last part for the day
-          ? setcurrentPartIndex(0)
-          : setcurrentPartIndex(increment(currentPartIndex))
-      } else {
-        setCount(increment(count))
-      }
-    }
-    if (e.target.innerHTML === 'prev') {
-      if (count === 0) {
-        // checks if is the first element of current part
-        setCount(randomArr.length - 1)
-        currentPartIndex === 0 // checks if current part is the last part for the day
-          ? setcurrentPartIndex(workoutWeek[day]?.length - 1)
-          : setcurrentPartIndex(decrement(currentPartIndex))
-      } else {
-        setCount(decrement(count))
-      }
-    }
-  }
+  // function handleChange(e) {
+  //   if (e.target.innerHTML === 'next') {
+  //     if (count === randomArr.length - 1) {
+  //       // checks if is the last element of current part
+  //       setCount(0)
+  //       currentPartIndex === workoutWeek[day]?.length - 1 // checks if current part is the last part for the day
+  //         ? setcurrentPartIndex(0)
+  //         : setcurrentPartIndex(increment(currentPartIndex))
+  //     } else {
+  //       setCount(increment(count))
+  //     }
+  //   }
+  //   if (e.target.innerHTML === 'prev') {
+  //     if (count === 0) {
+  //       // checks if is the first element of current part
+  //       setCount(randomArr.length - 1)
+  //       currentPartIndex === 0 // checks if current part is the last part for the day
+  //         ? setcurrentPartIndex(workoutWeek[day]?.length - 1)
+  //         : setcurrentPartIndex(decrement(currentPartIndex))
+  //     } else {
+  //       setCount(decrement(count))
+  //     }
+  //   }
+  // }
 
   function handleDay(e) {
     if (e.target.className === 'prevDay') {
@@ -130,7 +131,7 @@ export default function Exercise() {
     }
   }
 
-  if (data) {
+  if (data)
     return (
       <>
         <h1>{`Day: ${
@@ -142,33 +143,46 @@ export default function Exercise() {
         <button className="nextDay" onClick={handleDay}>
           &gt;
         </button>
-        <h2>{data[randomArr[count]]?.name.toUpperCase()}</h2>
-        <img src={data[randomArr[count]]?.gifUrl} alt="ExerciseGif" />
-        {/* <div className="container">
-        <img
-          src="../../data/images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
-          alt="ExerciseGif"
-          /> */}
-        {/* <div className="instructions">
-          {fakeData.instructions.map((item, i) => (
-            // eslint-disable-next-line react/jsx-key
-            <p key={i}>{item}</p>
-            ))}
-        </div>
-      </div> */}
-        <div className="instructions">
-          {data[randomArr[count]]?.instructions.map((item, i) => (
-            // eslint-disable-next-line react/jsx-key
-            <p key={i}>{item}</p>
-          ))}
-        </div>
-        <button className="button prev" onClick={handleChange}>
-          prev
-        </button>
-        <button className="button next" onClick={handleChange}>
-          next
-        </button>
+        <ul className='exercise-container'>
+          {res.map((partData) =>
+            randomArr.map((index) => (
+              <li className='exercise-item' key={partData[index].id}>
+                <h2>{partData[index]?.name.toUpperCase()}</h2>
+                <h3>{partData[index]?.bodyPart}</h3>
+                <img src={partData[index]?.gifUrl} alt="ExerciseGif" />
+                <div className="instructions">
+                  {partData[index]?.instructions.map((item, i) => (
+                    <p key={i}>{item}</p>
+                  ))}
+                </div>
+              </li>
+            )),
+          )}
+        </ul>
       </>
     )
+  {
+    /* <div className="container">
+    <img
+    src="../../data/images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
+    alt="ExerciseGif"
+  /> */
+  }
+  {
+    /* <div className="instructions">
+      {fakeData.instructions.map((item, i) => (
+        // eslint-disable-next-line react/jsx-key
+        <p key={i}>{item}</p>
+        ))}
+        </div>
+      </div> */
+  }
+  {
+    /* <button className="button prev" onClick={handleChange}>
+          prev
+          </button>
+          <button className="button next" onClick={handleChange}>
+          next
+        </button> */
   }
 }
