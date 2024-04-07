@@ -57,18 +57,21 @@ export default function Exercise() {
     ////This function generates an array of random numbers
     // min and max included
 
-    const randNumArr = []
+    const randNumArr: number[] = []
     function randNum(min: number, max: number) {
       return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
     for (let i = 0; i < 6 / workoutWeek[day]?.length; i++) {
-      randNumArr.push(randNum(min, max))
+      let num = randNum(min, max)
+      while (randNumArr.includes(num)) {
+        num = randNum(min, max)
+      }
+      randNumArr.push(num)
     }
 
     return randNumArr
   }
-  console.log(randomArr)
 
   function increment(num) {
     return num + 1
@@ -130,6 +133,8 @@ export default function Exercise() {
       day === workoutDays?.length - 1 ? setDay(0) : setDay(increment(day))
     }
   }
+  // setRandomArr(generateRandNumArray(1, 19))
+  console.log(day)
 
   if (data)
     return (
@@ -143,10 +148,10 @@ export default function Exercise() {
         <button className="nextDay" onClick={handleDay}>
           &gt;
         </button>
-        <ul className='exercise-container'>
+        <ul className="exercise-container">
           {res.map((partData) =>
             randomArr.map((index) => (
-              <li className='exercise-item' key={partData[index].id}>
+              <li className="exercise-item" key={partData[index].id}>
                 <h2>{partData[index]?.name.toUpperCase()}</h2>
                 <h3>{partData[index]?.bodyPart}</h3>
                 <img src={partData[index]?.gifUrl} alt="ExerciseGif" />
