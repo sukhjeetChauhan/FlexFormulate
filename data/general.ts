@@ -8,3 +8,4 @@ export const days = [
   'sunday',
 ]
 export const workoutDays: string[] = []
+export const workoutWeek: string[][] = []

@@ -1,21 +1,20 @@
 import { days } from '../../data/general'
-import { workoutDays } from '../../data/general'
+// import { workoutDays } from '../../data/general'
 import { Link } from 'react-router-dom'
 
-function ChooseDays() {
+function ChooseDays({ fn: handlerFunction, val: workoutDays, setStatus }) {
   function handleChange(e: { target: { checked: any; value: any } }) {
     const isChecked = e.target.checked
     const nonWorkingDay = !isChecked && e.target.value
 
     const workoutDay: string = isChecked && e.target.value
     if (workoutDay) {
-      workoutDays.includes(workoutDay) || workoutDays.push(workoutDay)
-      console.log(workoutDays)
+      workoutDays.includes(workoutDay) || workoutDays.push(workoutDay) //pushes the value of workout day if it does not include in the workout array
     } else {
-      const index = workoutDays.findIndex((day) => day === nonWorkingDay)
+      const index = workoutDays.findIndex((day) => day === nonWorkingDay) //removes the value from workout days array if unchecked
       workoutDays.splice(index, 1)
-      console.log(workoutDays)
     }
+    handlerFunction(workoutDays)
   }
 
   return (
@@ -36,8 +35,8 @@ function ChooseDays() {
           </label>
         </div>
       ))}
-      <button className="day-submit">
-        <Link to="/chooseMuscle">Submit</Link>
+      <button className="day-submit" onClick={() => setStatus(true)}>
+        Submit
       </button>
     </fieldset>
   )
