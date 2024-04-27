@@ -33,6 +33,7 @@ export default function Exercise() {
       return getExercise(workoutWeek[day])
     },
   })
+  console.log(data)
 
   useEffect(() => {
     Promise.all(data)
@@ -41,6 +42,7 @@ export default function Exercise() {
       })
       .catch((e) => console.log(e))
   }, [data])
+  console.log(res)
 
   if (isLoading) {
     return <h2>Loading...</h2>
