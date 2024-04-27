@@ -141,7 +141,6 @@ export default function Exercise() {
     }
   }
   // setRandomArr(generateRandNumArray(1, 19))
-  console.log(res)
 
   if (data)
     return (

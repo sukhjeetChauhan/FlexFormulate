@@ -9,7 +9,7 @@ export async function addUser(data: any) {
 }
 
 export async function getUserById(id: number) {
-  return await db('users').where({ id }).select()
+  return await db('users').where({ id }).select().first()
 }
 
 export async function updateUserById(id: number, data: any) {

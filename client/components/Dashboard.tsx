@@ -5,11 +5,11 @@ import Exercise from './Exercise'
 import { useGetById } from './Hooks'
 import { getUsersByIdApi } from '../api/userDbApi'
 import { Link, useParams } from 'react-router-dom'
+import Profile from './Profile'
 
 export const PreferencesContext = createContext(null)
 
 export default function Dashboard() {
-  const [count, setCount] = useState(0)
   const [preference, setPreference] = useState(null)
   const [showExercise, setShowExercise] = useState(false)
   const [showProfile, setShowProfile] = useState(true)
@@ -50,16 +50,7 @@ export default function Dashboard() {
           <button>Diet</button>
         </nav>
         <div className="dashboard-main">
-          {showProfile && (
-            <div className="profile">
-              <h1>Profile Page</h1>
-              <p>Name : {data[count].name}</p>
-              <p>Age : {data[count].age}</p>
-              <p>Weight : {`${data[count].weight_kgs} kg`}</p>
-              <p>Height : {`${data[count].height_cm} cm`}</p>
-              <p>BMR : {`${data[count].bmr_cals} calories`}</p>
-            </div>
-          )}
+          {showProfile && <Profile data={data} />}
           <div>
             <PreferencesContext.Provider value={preference}>
               {/* Render Exercise component only when showExercise is true */}
