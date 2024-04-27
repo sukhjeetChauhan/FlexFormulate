@@ -50,7 +50,7 @@ export default function Dashboard() {
           <button>Diet</button>
         </nav>
         <div className="dashboard-main">
-          {showProfile && <Profile data={data} />}
+          {showProfile && <Profile data={data} res={res} />}
           <div>
             <PreferencesContext.Provider value={preference}>
               {/* Render Exercise component only when showExercise is true */}
